@@ -1,0 +1,15 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Project's Name: ${project.name}
+${licensePrefix}Description: Script con la finalidad para implementar un sitio web de pliculas, series y anime online
+${licensePrefix}Programming Languages: PHP, JavaScript, HTML, CSS
+${licensePrefix}Programmer: Jose Luis Coyotzi Ipatzi
+${licensePrefix}File Created: ${date}, ${time}
+${licensePrefix}File Name: ${nameAndExt}
+${licensePrefix}Email: jlci811122@gmail.com
+${licensePrefix}
+${licensePrefix}Copyright @${date?date?string("yyyy")} ${project.organization!user}.
+<#if licenseLast??>
+${licenseLast}
+</#if>

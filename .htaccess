@@ -1,0 +1,16 @@
+# php -- BEGIN cPanel-generated handler, do not edit
+# Configure el paquete “ea-php70” como el lenguaje de programación predeterminado “PHP”.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php70 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+RewriteEngine on
+RewriteRule ^vendors/(.*)$   ci_back/vendors/$1 [L]
+RewriteRule ^images/(.*)$   ci_front/images/$1 [L]
+RewriteRule ^avatar/(.*)$   ci_front/avatars/$1 [L]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php [L]
