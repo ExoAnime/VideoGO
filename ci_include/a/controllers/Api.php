@@ -74,7 +74,7 @@ class Api extends CO_Controller {
     }
 
     private function decode_post_values() {
-        foreach ($this->input->post() as $key => $value) {
+        foreach ($_POST as $key => $value) {
             $x = $this->encryption->decrypt(urldecode($value));
             if ($x != '') {
                 $_POST[$key] = $x;

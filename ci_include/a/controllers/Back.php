@@ -89,7 +89,10 @@ class Back extends CO_Controller {
                 $uris = $this->uri->segment_array();
                 if (@$uris[2] == "user" && @$uris[3] == 'profile') {
                     $this->data['user_profile'] = $this->User->getSession();
-                    @$configuration_site->title = 'Tu Perfil';
+                    foreach ($this->Geo->get_geo_ip_profile($_SERVER['REMOTE_ADDR']) as $key => $value) {
+                        @$this->data['user_profile']->$key = $value;
+                    }
+                    @$configuration_site->title = 'Tu Perfil ' . ucwords($this->data['user_profile']->u_name);
                 }
                 break;
             default:

@@ -53,9 +53,21 @@ var VideoGO = {
                         if (step.toStep == 3) {
                             if ($(".btn-finish").length < 1) {
                                 $(".actionBar").append('<button class="btn btn-dark btn-finish buttonFinish" type="submit">Finish</button>');
-                                $(".btn-finish").css("margin-top","4px");
+                                $(".btn-finish").css("margin-top", "4px");
                             }
                         }
+                    }
+                });
+            }
+
+            if ($(".btn_upload_avatar").length > 0) {
+                $(".btn_upload_avatar").click(function () {
+                    $("#upload_avatar").val("");
+                    $("#upload_avatar").click();
+                });
+                $("#upload_avatar").change(function () {
+                    if ($(this).val() != '') {
+                        $("#form_upload").submit();
                     }
                 });
             }

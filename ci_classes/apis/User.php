@@ -110,6 +110,92 @@ class User extends CO_Model {
         }
     }
 
+    public function Update_information() {
+        if ($this->isLogin()) {
+            if (@$this->getSession()->u_id == @$_POST['u_id']) {
+                @$_POST['u_gender'] = @$_POST['gender'];
+                $u_id = $_POST['u_id'];
+                unset($_POST['gender'], $_POST['u_id']);
+                $user_info = $this->db->get_where("users", array("u_id" => $u_id))->row();
+                $update = array();
+                foreach ($_POST as $key => $value) {
+                    if ($_POST[$key] != @$user_info->$key) {
+                        $update[$key] = trim($value);
+                    }
+                }
+                if (sizeof($update) > 0) {
+                    if (@$update['u_first_name'] != '' && @$update['u_last_name'] != '') {
+                        @$update['u_name'] = @$update['u_first_name'] . " " . @$update['u_last_name'];
+                    } else if (@$update['u_first_name'] != '' && @$update['u_last_name'] == '') {
+                        @$update['u_name'] = @$update['u_first_name'] . " " . @$user_info->u_last_name;
+                    } else if (@$update['u_first_name'] == '' && @$update['u_last_name'] != '') {
+                        @$update['u_name'] = @$user_info->u_first_name . " " . @$update['u_last_name'];
+                    }
+                    $str = $this->db->update_string('users', $update, array("u_id" => $u_id));
+                    $this->db->query($str);
+                    if (!$this->isDataBaseError()) {
+                        $this->notify("datos actualizados correctamente", "info");
+                        $this->updateSession();
+                        $this->print_js("location.reload();");
+                    }
+                }
+            } else {
+                $this->setHeaderError("Wrong profile");
+            }
+        } else {
+            $this->setHeaderError("You are not logged in");
+        }
+    }
+
+    public function Change_password() {
+        if ($this->isLogin()) {
+            if (@$this->getSession()->u_id == @$_POST['u_id']) {
+                if (@$this->getSession()->u_password == md5(@$_POST['old_password'])) {
+                    if (@$this->getSession()->u_password != md5(@$_POST['u_password'])) {
+                        if (@$_POST['u_password'] == @$_POST['u_confirm_password']) {
+                            if ($this->CheckPasswordStrength($_POST['u_password']) > 3) {
+                                $str = $this->db->update_string('users', array("u_password" => md5(@$_POST['u_password'])), array("u_id" => $_POST['u_id']));
+                                $this->db->query($str);
+                                if (!$this->isDataBaseError()) {
+                                    $this->notify("contraseña cambiada correctamente", "success");
+                                    $this->print_js("location.href='/logout';",1000);
+                                }
+                            } else {
+                                $this->setHeaderError("The new password is very weak");
+                            }
+                        } else {
+                            $this->setHeaderError("New passwords do not match");
+                        }
+                    } else {
+                        $this->setHeaderError("The current and the new password are the same");
+                    }
+                } else {
+                    $this->setHeaderError("Current password does not match");
+                }
+            } else {
+                $this->setHeaderError("Wrong profile");
+            }
+        } else {
+            $this->setHeaderError("You are not logged in");
+        }
+    }
+
+    public function Upload_avatar() {
+        if ($this->isLogin()) {
+            if (@$this->getSession()->u_id == @$_POST['u_id']) {
+                $this->UploadImg("upload_avatar", 170, 0, APP_FRONT . "avatars/", md5($_FILES['upload_avatar']['name']) . ".png");
+                $this->db->query("UPDATE `users` SET `u_avatar` = '/avatar/" . md5($_FILES['upload_avatar']['name']) . ".png' WHERE `u_id` = " . @$_POST['u_id'] . ";");
+                $this->notify("avatar de usuario actualizado", "success");
+                $this->print_js('$(".avatar-view, .img-circle").attr("src","/avatar/' . md5($_FILES['upload_avatar']['name']) . '.png");');
+                $this->updateSession();
+            } else {
+                $this->setHeaderError("Wrong profile");
+            }
+        } else {
+            $this->setHeaderError("You are not logged in");
+        }
+    }
+
     public function getSession() {
         return @$this->session->userdata("vg_user");
     }
@@ -120,6 +206,18 @@ class User extends CO_Model {
         } else {
             return FALSE;
         }
+    }
+
+    private function updateSession() {
+        $other = array(
+            "u_username" => $this->getSession()->u_username,
+            "u_password" => $this->getSession()->u_password
+        );
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where($other);
+        $isUser = $this->db->get()->row();
+        $this->session->set_userdata("vg_user", $isUser);
     }
 
     private function SendEmailRegister() {

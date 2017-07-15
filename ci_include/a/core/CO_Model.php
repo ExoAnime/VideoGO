@@ -102,4 +102,54 @@ class CO_Model extends CI_Model {
         return $link;
     }
 
+    public function UploadImg($file_id, $max_height = 0, $max_width = 0, $save_path, $save_name_file) {
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['overwrite'] = TRUE;
+        $config['upload_path'] = $save_path;
+        $config['file_name'] = $save_name_file;
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload($file_id)) {
+            $this->setHeaderError(str_replace(array("<p>", "</p>"), "", $this->upload->display_errors()));
+        }
+        if ($max_height > 0 || $max_width > 0) {
+            $this->ResizeImg($max_width, $max_height, $save_path . $save_name_file);
+        }
+    }
+
+    public function ResizeImg($w, $h, $file) {
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $file;
+        $config['create_thumb'] = FALSE;
+        $config['quality'] = 100;
+        if ($w > 0) {
+            $config['width'] = $w;
+        }
+        if ($h > 0) {
+            $config['height'] = $h;
+        }
+        if ($w > 0 && $h > 0) {
+            $config['maintain_ratio'] = FALSE;
+        } else {
+            $config['maintain_ratio'] = TRUE;
+        }
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+    }
+
+    public function CheckPasswordStrength($password) {        
+        $strength = 0;
+        $patterns = array('#[a-z]#', '#[A-Z]#', '#[0-9]#', '/[¬!"£$%^&*()`{}\[\]:@~;\'#<>?,.\/\\-=_+\|]/');
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $password, $matches)) {
+                $strength++;
+            }
+        }
+        return $strength;
+
+        // 1 - weak 
+        // 2 - not weak 
+        // 3 - acceptable 
+        // 4 - strong 
+    }
+
 }

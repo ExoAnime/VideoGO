@@ -9,7 +9,7 @@
 
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="<?= @$vg_user->u_avatar ?>" alt="<?= @$vg_user->u_username ?>" class="profile_img img-circle" />
+                <img src="<?= @$vg_user->u_avatar ?>" alt="<?= @$vg_user->u_username ?>" class="profile_img img-circle" style="background: transparent;" />
             </div>
             <div class="profile_info">
                 <span>Level: <?= ucfirst($vg_user->u_level_name) ?>,</span>
