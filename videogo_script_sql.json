@@ -14,7 +14,7 @@
         },
         "users": {
             "querys": [
-                "CREATE TABLE `users` (`u_id` int(11) NOT NULL,`u_username` varchar(20) NOT NULL,`u_password` varchar(100) NOT NULL,`u_name` varchar(150) NOT NULL,`u_email` varchar(150) NOT NULL,`u_avatar` varchar(220) NOT NULL DEFAULT '/avatar/picon.png',`u_status` int(5) NOT NULL DEFAULT '0',`u_level` int(2) NOT NULL DEFAULT '1',`u_level_name` varchar(25) NOT NULL DEFAULT 'usuario',`u_date` int(50) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+                "CREATE TABLE `users` (`u_id` int(11) NOT NULL,`u_username` varchar(20) NOT NULL,`u_password` varchar(100) NOT NULL,`u_name` varchar(150) NOT NULL,`u_first_name` varchar(150) NOT NULL,`u_last_name` varchar(150) NOT NULL,`u_gender` varchar(50) NOT NULL,`u_bios` text NOT NULL,`u_email` varchar(150) NOT NULL,`u_avatar` varchar(220) NOT NULL DEFAULT '/avatar/picon.png',`u_country` varchar(150) NOT NULL,`u_city` varchar(150) NOT NULL,`u_zip_code` int(10) NOT NULL,`u_location` varchar(150) NOT NULL,`u_status` int(5) NOT NULL DEFAULT '0',`u_level` int(2) NOT NULL DEFAULT '1',`u_level_name` varchar(25) NOT NULL DEFAULT 'usuario',`u_date` int(50) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
                 "ALTER TABLE `users` ADD PRIMARY KEY (`u_id`);",
                 "ALTER TABLE `users` MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;"
             ]
