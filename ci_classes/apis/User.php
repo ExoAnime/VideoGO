@@ -132,8 +132,8 @@ class User extends CO_Model {
             'subject' => '¡Ya casi! Activa Tu Cuenta',
             'html' => $msg
         );
-        $this->setBasicAuthentication("api", $this->encryption->decrypt('d6ddce688f6c17ac11c7efad182d71e7d19be72fe498b47d1b6fedae76efde49f20e96d55f9f2b20a322ba4030277510923541a90f916c3df23f36b26177b3935erJ1z1YGF/v5pVCs8uIYWBJXgg/3v1AgoOmmlJVBit+LB80zG4Zb0/vR4YNFWShNNpNOxMCvLJDRtsW6OuJeA=='));
-        $this->post($this->encryption->decrypt("45203fb45b887c439225de8576fc13f8760ca9460c01b22b7cbdb54adf49f9036d1e29840a75a92d5d4f647e650cce2ce5c320160b26928ae01d23e098492aa8XrkiBEx+9anAAD96WIIpNVVyD18WbuiAkzxTdOiwAykACVbVcvl1XmfGFkO8uZh54+Wsz9ULb9gjCbUFwZNjZduayO6dRhJ5RMIygBx05tM="), $post);
+        $this->setBasicAuthentication($this->encryption->decrypt("d9dc793fe7f4b9e6a17077155b8e1cb598eb96cb99a4157fa92e3f27f5a527969cee160546110839ed7566ff1dd5be970cd12b2959b6454936fc80ff2e0eef8dqsNWeBgycVPMfw2uPdZr5B2UEUpjL4R8Gv0gsQtTgd0="), $this->encryption->decrypt('f329ad5094a09aa2adf1b0c1255c66faad649a3d4f2c526f8a4cc90dd979e970e1ded62452ac52df313bc008db2cc3aba501630e5f2cc8dea62e4eb24f895048LROo7pekvuD8eV8sbap+8gkO8RXDdtJm8H1ezqeCEyNM/yuNUl6SFSyIjlD/UEeSgII9NsS2T0l3BoI3E/tn6Q=='));
+        $this->post($this->encryption->decrypt("5a11bc24f82b27c049e0d03819664abcb0da30443568c25ed2430e7b41e414b9f8f16d1e0a6c23b6396645ba142b56410c7d658a0cd89c9817a52fc1cc41c92eEC2lnBWVLr6Ee9z5ktsYxjOknODbwmai3ctgATLgyt88WkU+szWuvUQkWyA9FW0irgqKL+TlNz+Ts0mFXjVNPr8QC1A2y4qHy2SR+u1JoCw="), $post);
         if (@$this->response->message == 'Queued. Thank you.') {
             $this->notify('se envio un correo de activacion, al correo registrado', 'info');
         } else {
