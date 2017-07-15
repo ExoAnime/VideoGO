@@ -1,0 +1,23 @@
+{
+    "tables": {
+        "ci_sessions": {
+            "querys": [
+                "CREATE TABLE `ci_sessions` (`id` varchar(128) NOT NULL,`ip_address` varchar(45) NOT NULL,`timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',`data` blob NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;"
+            ]
+        },
+        "configuration": {
+            "querys": [
+                "CREATE TABLE `configuration` (`c_id` int(11) NOT NULL,`c_name` varchar(100) NOT NULL,`c_slogan` varchar(150) NOT NULL,`c_description` text NOT NULL,`c_seo` text NOT NULL,`c_ssl` int(2) NOT NULL DEFAULT '0',`c_www` int(2) NOT NULL DEFAULT '0',`c_fb_page` varchar(220) NOT NULL,`c_expire_limit` int(10) NOT NULL DEFAULT '1200') ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+                "ALTER TABLE `configuration` ADD PRIMARY KEY (`c_id`);",
+                "ALTER TABLE `configuration` MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;"
+            ]
+        },
+        "users": {
+            "querys": [
+                "CREATE TABLE `users` (`u_id` int(11) NOT NULL,`u_username` varchar(20) NOT NULL,`u_password` varchar(100) NOT NULL,`u_name` varchar(150) NOT NULL,`u_email` varchar(150) NOT NULL,`u_avatar` varchar(220) NOT NULL DEFAULT '/avatar/picon.png',`u_status` int(5) NOT NULL DEFAULT '0',`u_level` int(2) NOT NULL DEFAULT '1',`u_level_name` varchar(25) NOT NULL DEFAULT 'usuario',`u_date` int(50) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;",
+                "ALTER TABLE `users` ADD PRIMARY KEY (`u_id`);",
+                "ALTER TABLE `users` MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;"
+            ]
+        }
+    }
+}

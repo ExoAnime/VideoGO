@@ -111,7 +111,7 @@ class User extends CO_Model {
     }
 
     public function getSession() {
-        return $this->session->userdata("vg_user");
+        return @$this->session->userdata("vg_user");
     }
 
     public function isLogin() {

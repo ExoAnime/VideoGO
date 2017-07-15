@@ -404,8 +404,8 @@ $config['sess_regenerate_destroy'] = TRUE;
 $config['cookie_prefix'] = '';
 $config['cookie_domain'] = $_SERVER['SERVER_NAME'];
 $config['cookie_path'] = '/';
-$config['cookie_secure'] = TRUE;
-$config['cookie_httponly'] = TRUE;
+$config['cookie_secure'] = FALSE;
+$config['cookie_httponly'] = FALSE;
 
 /*
   |--------------------------------------------------------------------------
@@ -449,7 +449,7 @@ $config['global_xss_filtering'] = FALSE;
   | 'csrf_regenerate' = Regenerate token on every submission
   | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
  */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_videogo';
 $config['csrf_cookie_name'] = 'csrf_videogo';
 $config['csrf_expire'] = 7200;

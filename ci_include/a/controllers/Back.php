@@ -26,31 +26,37 @@ class Back extends CO_Controller {
     public function view() {
         $this->data['page'] = implode("/", $this->uri->segment_array(2, 3));
 
-        if ($this->data['vg_user'] == '') {
-            if ($this->data['page'] == 'user/active') {
-                $this->data['page'] = "modules/user/active";
-            } else {
-                $this->data['page'] = "modules/user/access";
-            }
-            if (!file_exists(APP_BACK . $this->data['page'] . ".php")) {
-                $this->data['page'] = "pages/errors/404";
-            }
-            $this->data['site'] = $this->getPageTitle($this->data['page'], $this->data['site']);
+        if ($this->data['page'] == 'install') {
+            $this->data['page'] = "modules/settings/install";
             $this->load->view("../../." . APP_BACK . "pages/header", $this->data);
             $this->load->view("../../." . APP_BACK . $this->data['page']);
         } else {
-            if ($this->data['page'] == 'dashboard') {
-                $this->data['page'] = "pages/" . $this->data['page'];
+            if (@$this->data['vg_user'] == '') {
+                if ($this->data['page'] == 'user/active') {
+                    $this->data['page'] = "modules/user/active";
+                } else {
+                    $this->data['page'] = "modules/user/access";
+                }
+                if (!file_exists(APP_BACK . $this->data['page'] . ".php")) {
+                    $this->data['page'] = "pages/errors/404";
+                }
+                @$this->data['site'] = $this->getPageTitle(@$this->data['page'], @$this->data['site']);
+                $this->load->view("../../." . APP_BACK . "pages/header", $this->data);
+                $this->load->view("../../." . APP_BACK . $this->data['page']);
             } else {
-                $this->data['page'] = str_replace("dashboard", "modules", $this->data['page']);
+                if ($this->data['page'] == 'dashboard') {
+                    $this->data['page'] = "pages/" . $this->data['page'];
+                } else {
+                    $this->data['page'] = str_replace("dashboard", "modules", $this->data['page']);
+                }
+                if (!file_exists(APP_BACK . $this->data['page'] . ".php")) {
+                    $this->data['page'] = "pages/errors/404";
+                }
+                $this->isAdministratorPage();
+                $this->data['site'] = $this->getPageTitle($this->data['page'], $this->data['site']);
+                $this->load->view("../../." . APP_BACK . "pages/header", $this->data);
+                $this->load->view("../../." . APP_BACK . "index");
             }
-            if (!file_exists(APP_BACK . $this->data['page'] . ".php")) {
-                $this->data['page'] = "pages/errors/404";
-            }
-            $this->isAdministratorPage();
-            $this->data['site'] = $this->getPageTitle($this->data['page'], $this->data['site']);
-            $this->load->view("../../." . APP_BACK . "pages/header", $this->data);
-            $this->load->view("../../." . APP_BACK . "index");
         }
         $this->load->view("../../." . APP_BACK . "pages/footer");
     }
@@ -91,7 +97,7 @@ class Back extends CO_Controller {
                 break;
         }
 
-        if ($this->User->getSession() == '' && $uri_page != "modules/user/active") {
+        if (@$this->User->getSession() == '' && $uri_page != "modules/user/active") {
             @$configuration_site->title = "Acceder al Sitio";
         }
 

@@ -61,7 +61,7 @@ class CO_Model extends CI_Model {
         header('HTTP/1.0 ' . $code_error . ' ' . $error, true, $code_error);
         exit();
     }
-    
+
     public function isDataBaseError() {
         if (@$this->db->error()["message"] != '') {
             $this->setHeaderError("Error de sistema: " . $this->db->error()["code"] . ", " . $this->db->error()["message"]);
@@ -69,13 +69,36 @@ class CO_Model extends CI_Model {
             return FALSE;
         }
     }
-    
+
     public function cut_str($str, $left, $right) {
-	$str = substr(stristr($str, $left), strlen($left));
-	$leftLen = strlen(stristr($str, $right)); 
-	$leftLen = $leftLen ? -($leftLen) : strlen($str);
-	$str = substr($str, 0, $leftLen);
-	return $str;
-}
+        $str = substr(stristr($str, $left), strlen($left));
+        $leftLen = strlen(stristr($str, $right));
+        $leftLen = $leftLen ? -($leftLen) : strlen($str);
+        $str = substr($str, 0, $leftLen);
+        return $str;
+    }
+
+    public function script_tag($src = '', $type = 'text/javascript', $index_page = FALSE) {
+        $CI = & get_instance();
+
+        $link = "";
+        if (is_array($src)) {
+            foreach ($src as $v) {
+                $link .= script_tag($v, $type, $index_page);
+            }
+        } else {
+            $link = "\n\t\t<script ";
+            if (strpos($src, '://') !== FALSE) {
+                $link .= 'src="' . $src . '" ';
+            } elseif ($index_page === TRUE) {
+                $link .= 'src="' . $CI->config->site_url($src) . '" ';
+            } else {
+                $link .= 'src="' . $CI->config->slash_item('base_url') . $src . '" ';
+            }
+
+            $link .= " type=\"{$type}\"></script>";
+        }
+        return $link;
+    }
 
 }

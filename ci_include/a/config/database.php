@@ -8,10 +8,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn' => '',
-    'hostname' => 'localhost',
-    'username' => 'videogo_script',
-    'password' => 'Josbecle01',
-    'database' => 'videogo_script',
+    'hostname' => '',
+    'username' => '',
+    'password' => '',
+    'database' => '',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,

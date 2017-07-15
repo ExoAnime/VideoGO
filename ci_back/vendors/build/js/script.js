@@ -41,6 +41,25 @@ var VideoGO = {
                 }
             }
 
+            if ($(".form_wizard").length > 0) {
+                $('#wizard_install').smartWizard({
+                    buttonOrder: ['next', 'prev'],
+                    enableFinish: false,
+                    hideButtonsOnDisabled: true,
+                    onShowStep: function (obj, step) {
+                        if ($(".buttonFinish").length > 0) {
+                            $(".buttonFinish").remove();
+                        }
+                        if (step.toStep == 3) {
+                            if ($(".btn-finish").length < 1) {
+                                $(".actionBar").append('<button class="btn btn-dark btn-finish buttonFinish" type="submit">Finish</button>');
+                                $(".btn-finish").css("margin-top","4px");
+                            }
+                        }
+                    }
+                });
+            }
+
         } catch (e) {
             VideoGO.Notify(e, "error");
         }

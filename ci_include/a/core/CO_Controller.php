@@ -24,7 +24,30 @@ class CO_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->LoadApis();
-        $this->setConfiguration();        
+        if ($this->isInstall()) {
+            $this->setConfiguration();
+        }
+    }
+
+    private function isInstall() {
+        if (gettype(@$this->db) == 'object' && gettype(@$this->db) != NULL) {
+            if ($this->uri->segment(1) == 'install') {
+                header("Location: /");
+                exit();
+            }
+            return TRUE;
+        } else {
+            @$this->data['site']->title = "Script installer";
+            @$this->data['site']->slogan = "VideoGO";
+            @$this->data['site']->url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'];
+            $this->data['site']->c_expire_limit = 18000;
+            if ($this->uri->segment(1) != 'install' && $this->uri->segment(1) != 'api') {
+                header("Location: /install");
+                exit();
+            } else {
+                return FALSE;
+            }
+        }
     }
 
     private function LoadApis() {
@@ -33,6 +56,7 @@ class CO_Controller extends CI_Controller {
             $value = str_replace(".php", "", $value);
             $this->load->model("../../." . APP_CLASSES . "apis/" . $value, $value);
         }
+        $this->encryption->initialize(array('driver' => 'mcrypt'));
     }
 
     private function setConfiguration() {
@@ -41,7 +65,6 @@ class CO_Controller extends CI_Controller {
         $this->data['site']->url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'];
         $this->onSSL($this->data['site']->c_ssl);
         $this->onWWW($this->data['site']->c_www);
-        $this->encryption->initialize(array('driver' => 'mcrypt'));
     }
 
     private function onWWW($on = true) {
