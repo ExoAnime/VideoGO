@@ -89,14 +89,15 @@ class CO_Model extends CI_Model {
         } else {
             $link = "\n\t\t<script ";
             if (strpos($src, '://') !== FALSE) {
-                $link .= 'src="' . $src . '" ';
+                $link .= 'src="' . $src . '"';
             } elseif ($index_page === TRUE) {
-                $link .= 'src="' . $CI->config->site_url($src) . '" ';
+                $link .= 'src="' . $CI->config->site_url($src) . '"';
             } else {
-                $link .= 'src="' . $CI->config->slash_item('base_url') . $src . '" ';
+                $link .= 'src="' . $CI->config->slash_item('base_url') . $src . '"';
             }
 
-            $link .= " type=\"{$type}\"></script>";
+            //$link .= " type=\"{$type}\"></script>";
+            $link .= "></script>";
         }
         return $link;
     }

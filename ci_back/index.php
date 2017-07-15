@@ -1,4 +1,5 @@
 
+
 <div class="container body">
     <div class="main_container">
 
@@ -12,8 +13,15 @@
                 <?php
                 $this->load->view("../../." . APP_BACK . @$page);
                 ?>
+            </div>            
+        </div>
+
+        <footer>
+            <div class="pull-right">
+                ©2017 All Rights Reserved by xlFederallk0lx. This site was created with VideoGO Script. <a href="http://shink.in/GiRuB" target="_blank">Download Script</a>
             </div>
-        </div>        
+            <div class="clearfix"></div>
+        </footer>
 
     </div>
 </div>
