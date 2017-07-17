@@ -24,7 +24,8 @@
                     <li>
                         <a><i class="fa fa-user-circle-o"></i>Usuario<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="<?= @$site->url ?>/dashboard/user/profile">Perfil</a></li>
+                            <li><a href="<?= @$site->url ?>/dashboard/user/all">Ver Todos</a></li>
+                            <li><a href="<?= @$site->url ?>/dashboard/user/profile">Tu Perfil</a></li>
                         </ul>
                     </li>
                     <?php

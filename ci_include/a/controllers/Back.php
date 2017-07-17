@@ -24,7 +24,9 @@ class Back extends CO_Controller {
     }
 
     public function view() {
-        $this->data['page'] = implode("/", $this->uri->segment_array(2, 3));
+        $uris = $this->uri->segment_array();
+        unset($uris[4]);
+        $this->data['page'] = implode("/", $uris);
 
         if ($this->data['page'] == 'install') {
             $this->data['page'] = "modules/settings/install";
@@ -87,6 +89,17 @@ class Back extends CO_Controller {
                 break;
             case "pages/errors/404":
                 @$configuration_site->title = 'Pagina no encontrada';
+                break;
+            case "modules/user/all":
+                $config['total_rows'] = $this->db->count_all_results("users");
+                $config['uri_segment'] = 4;
+                $config['per_page'] = 9;
+                $config['base_url'] = base_url()."dashboard/user/all";
+                $this->pagination->initialize($config);
+                $this->db->order_by('u_username', 'ASC');
+                $this->db->limit(9, $this->uri->segment(4));
+                @$this->data['all_users']->data = $this->Site->DB2Array($this->db->get("users"));
+                @$configuration_site->title = 'Usuarios del sitio';
                 break;
             case "modules/user/profile":
                 $uris = $this->uri->segment_array();

@@ -145,11 +145,16 @@ class CO_Model extends CI_Model {
             }
         }
         return $strength;
-
-        // 1 - weak 
-        // 2 - not weak 
-        // 3 - acceptable 
-        // 4 - strong 
+    }
+    
+    public function DB2Array($query){
+        $result=array();
+        if($query->num_rows()>0){
+            foreach ($query->result() as $value) {
+                array_push($result, $value);
+            }
+        }
+        return $result;
     }
 
 }
