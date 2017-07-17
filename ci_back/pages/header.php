@@ -61,5 +61,11 @@ Copyright @2017 xlfederalelk0lx.
             echo link_tag(@$site->url . $css_files[$i]);
         }
         ?>
+        
+        <style>
+            .fa{
+                margin-right: 5px;
+            }
+        </style>
     </head>
     <body class="<?= (@$vg_user == '') ? "login" : "nav-md" ?>">

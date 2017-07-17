@@ -113,7 +113,9 @@ class User extends CO_Model {
     public function Update_information() {
         if ($this->isLogin()) {
             if (@$this->getSession()->u_id == @$_POST['u_id']) {
-                @$_POST['u_gender'] = @$_POST['gender'];
+                if (@$_POST['gender'] != '') {
+                    @$_POST['u_gender'] = @$_POST['gender'];
+                }
                 $u_id = $_POST['u_id'];
                 unset($_POST['gender'], $_POST['u_id']);
                 $user_info = $this->db->get_where("users", array("u_id" => $u_id))->row();
@@ -158,7 +160,7 @@ class User extends CO_Model {
                                 $this->db->query($str);
                                 if (!$this->isDataBaseError()) {
                                     $this->notify("contraseña cambiada correctamente", "success");
-                                    $this->print_js("location.href='/logout';",1000);
+                                    $this->print_js("location.href='/logout';", 1000);
                                 }
                             } else {
                                 $this->setHeaderError("The new password is very weak");

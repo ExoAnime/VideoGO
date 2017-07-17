@@ -47,6 +47,9 @@ class Back extends CO_Controller {
                 if ($this->data['page'] == 'dashboard') {
                     $this->data['page'] = "pages/" . $this->data['page'];
                 } else {
+                    if ($this->uri->segment(2) == 'profile') {
+                        $this->data['page'] = "dashboard/user/profile";
+                    }
                     $this->data['page'] = str_replace("dashboard", "modules", $this->data['page']);
                 }
                 if (!file_exists(APP_BACK . $this->data['page'] . ".php")) {
@@ -93,6 +96,16 @@ class Back extends CO_Controller {
                         @$this->data['user_profile']->$key = $value;
                     }
                     @$configuration_site->title = 'Tu Perfil ' . ucwords($this->data['user_profile']->u_name);
+                } else {
+                    $user = $this->db->get_where("users", array("u_username" => $this->uri->segment(3)))->row();
+                    if (@$user != '') {
+                        $this->data['user_profile'] = $user;
+                        $this->data['user_profile_public'] = true;
+                        @$configuration_site->title = "Perfil de " . ucwords($this->data['user_profile']->u_name);
+                    } else {
+                        $this->data['page'] = 'pages/errors/404';
+                        @$configuration_site->title = 'Pagina no encontrada';
+                    }
                 }
                 break;
             default:
