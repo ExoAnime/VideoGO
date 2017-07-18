@@ -55,7 +55,7 @@ Copyright @2017 xlfederalelk0lx.
         <title><?= @$site->title ?> - <?= @$site->slogan ?></title>
         <?php
         $css_files = array("/vendors/bootstrap/dist/css/bootstrap.min.css", "/vendors/font-awesome/css/font-awesome.min.css", "/vendors/nprogress/nprogress.css", "/vendors/animate.css/animate.min.css", "/vendors/pnotify/dist/pnotify.css", "/vendors/pnotify/dist/pnotify.buttons.css", "/vendors/pnotify/dist/pnotify.nonblock.css");
-        if (@$page == 'modules/settings/genders') {
+        if (@$page == 'modules/settings/genders' || @$page == 'modules/settings/qualities') {
             array_push($css_files, "/vendors/datatables.net/css/jquery.dataTables.min.css");
         }
         array_push($css_files, "/vendors/build/css/custom.min.css");
@@ -69,6 +69,9 @@ Copyright @2017 xlfederalelk0lx.
         <style>
             .fa{
                 margin-right: 5px;
+            }
+            .m-top-19{
+                margin-top: 19px;
             }
         </style>
     </head>

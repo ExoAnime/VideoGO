@@ -86,6 +86,12 @@ class Back extends CO_Controller {
             case "modules/settings/site":
                 @$configuration_site->title = 'Configuracion del Sitio';
                 break;
+            case "modules/settings/qualities":
+                @$this->data['all_qualities']->count = $this->db->count_all_results('qualities');
+                $this->db->order_by('q_name', 'ASC');
+                @$this->data['all_qualities']->data = $this->Site->DB2Array($this->db->get("qualities"));
+                @$configuration_site->title = 'Calidades del Contenido';
+                break;
             case "modules/settings/genders":
                 @$this->data['all_genders']->count = $this->db->count_all_results('genders');
                 $this->db->order_by('g_name', 'ASC');
@@ -127,6 +133,7 @@ class Back extends CO_Controller {
                 }
                 break;
             default:
+                @$this->data['all_genders']->count = $this->db->count_all_results('genders');
                 @$this->data['all_users']->count = $this->db->count_all_results('users');
                 @$configuration_site->title = 'Panel de Control';
                 break;

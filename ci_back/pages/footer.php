@@ -8,7 +8,7 @@ echo $this->Site->script_tag(@$site->url . "/vendors/pnotify/dist/pnotify.button
 echo $this->Site->script_tag(@$site->url . "/vendors/pnotify/dist/pnotify.nonblock.js");
 echo $this->Site->script_tag(@$site->url . "/vendors/fastclick/lib/fastclick.js");
 echo $this->Site->script_tag(@$site->url . "/vendors/nprogress/nprogress.js");
-if (@$page == 'modules/settings/genders') {
+if (@$page == 'modules/settings/genders' || @$page == 'modules/settings/qualities') {
     echo $this->Site->script_tag(@$site->url . "/vendors/datatables.net/js/jquery.dataTables.min.js");
 }
 echo $this->Site->script_tag(@$site->url . "/vendors/build/js/script.js?v=" . time());

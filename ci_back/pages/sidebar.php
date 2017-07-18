@@ -36,6 +36,7 @@
                             <ul class="nav child_menu">
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/site">Sitio</a></li>
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/genders">Generos</a></li>
+                                <li><a href="<?= @$site->url ?>/dashboard/settings/qualities">Calidades</a></li>
                             </ul>
                         </li>
                         <?php
