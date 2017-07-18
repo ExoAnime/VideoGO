@@ -25,6 +25,29 @@ class Site extends CO_Model {
         parent::__construct();
     }
 
+    public function Add_genders() {
+        if ($this->User->isLogin()) {
+            if (@$this->User->getSession()->u_level > 1) {
+                @$_POST["g_seo"] = $this->slug(trim($_POST['g_name']));
+                $isGender = @$this->db->get_where("genders", array("g_seo" => $_POST["g_seo"]))->row();
+                if ($isGender == '') {
+                    $_p['g_name'] = strtolower(trim($_POST['g_name']));
+                    $this->db->insert("genders", $_POST);
+                    if (!$this->isDataBaseError()) {
+                        $this->notify("genero agregado correctamente", "success");
+                        $this->print_js("location.reload();");
+                    }
+                } else {
+                    $this->setHeaderError("A gender with this name already exists");
+                }
+            } else {
+                $this->setHeaderError("You do not have the necessary privileges");
+            }
+        } else {
+            $this->setHeaderError("You do not have an active session");
+        }
+    }
+
     public function UpdateInfo() {
         if ($this->User->isLogin()) {
             if (@$this->User->getSession()->u_level > 1) {

@@ -54,14 +54,18 @@ Copyright @2017 xlfederalelk0lx.
         <meta itemprop="image" content="http://www.pelispedia.tv/cdn/img/pelispedia.jpg">
         <title><?= @$site->title ?> - <?= @$site->slogan ?></title>
         <?php
-        $css_files = array("/vendors/bootstrap/dist/css/bootstrap.min.css", "/vendors/font-awesome/css/font-awesome.min.css", "/vendors/nprogress/nprogress.css", "/vendors/animate.css/animate.min.css", "/vendors/pnotify/dist/pnotify.css", "/vendors/pnotify/dist/pnotify.buttons.css", "/vendors/pnotify/dist/pnotify.nonblock.css", "/vendors/build/css/custom.min.css",);
+        $css_files = array("/vendors/bootstrap/dist/css/bootstrap.min.css", "/vendors/font-awesome/css/font-awesome.min.css", "/vendors/nprogress/nprogress.css", "/vendors/animate.css/animate.min.css", "/vendors/pnotify/dist/pnotify.css", "/vendors/pnotify/dist/pnotify.buttons.css", "/vendors/pnotify/dist/pnotify.nonblock.css");
+        if (@$page == 'modules/settings/genders') {
+            array_push($css_files, "/vendors/datatables.net/css/jquery.dataTables.min.css");
+        }
+        array_push($css_files, "/vendors/build/css/custom.min.css");
         for ($i = 0; $i < sizeof($css_files); $i++) {
             if ($i > 0)
                 echo "\t\t";
             echo link_tag(@$site->url . $css_files[$i]);
         }
         ?>
-        
+
         <style>
             .fa{
                 margin-right: 5px;

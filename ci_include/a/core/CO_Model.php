@@ -102,6 +102,25 @@ class CO_Model extends CI_Model {
         return $link;
     }
 
+    public function slug($string) {
+        $characters = array(
+            "Á" => "A", "Ç" => "c", "É" => "e", "Í" => "i", "Ñ" => "n", "Ó" => "o", "Ú" => "u",
+            "á" => "a", "ç" => "c", "é" => "e", "í" => "i", "ñ" => "n", "ó" => "o", "ú" => "u",
+            "à" => "a", "è" => "e", "ì" => "i", "ò" => "o", "ù" => "u"
+        );
+
+        $string = strtr($string, $characters);
+        $string = strtolower(trim($string));
+        $string = preg_replace("/[^a-z0-9-]/", "-", $string);
+        $string = preg_replace("/-+/", "-", $string);
+
+        if (substr($string, strlen($string) - 1, strlen($string)) === "-") {
+            $string = substr($string, 0, strlen($string) - 1);
+        }
+
+        return $string;
+    }
+
     public function UploadImg($file_id, $max_height = 0, $max_width = 0, $save_path, $save_name_file) {
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = TRUE;
@@ -136,7 +155,7 @@ class CO_Model extends CI_Model {
         $this->image_lib->resize();
     }
 
-    public function CheckPasswordStrength($password) {        
+    public function CheckPasswordStrength($password) {
         $strength = 0;
         $patterns = array('#[a-z]#', '#[A-Z]#', '#[0-9]#', '/[¬!"£$%^&*()`{}\[\]:@~;\'#<>?,.\/\\-=_+\|]/');
         foreach ($patterns as $pattern) {
@@ -146,10 +165,10 @@ class CO_Model extends CI_Model {
         }
         return $strength;
     }
-    
-    public function DB2Array($query){
-        $result=array();
-        if($query->num_rows()>0){
+
+    public function DB2Array($query) {
+        $result = array();
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $value) {
                 array_push($result, $value);
             }

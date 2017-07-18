@@ -35,6 +35,7 @@
                             <a><i class="fa fa-cogs"></i>Configuracion<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/site">Sitio</a></li>
+                                <li><a href="<?= @$site->url ?>/dashboard/settings/genders">Generos</a></li>
                             </ul>
                         </li>
                         <?php

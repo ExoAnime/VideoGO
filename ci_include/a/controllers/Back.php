@@ -78,7 +78,6 @@ class Back extends CO_Controller {
     }
 
     public function getPageTitle($uri_page, $configuration_site) {
-        //echo $uri_page;
         @$configuration_site->slogan = $configuration_site->c_name;
         switch ($uri_page) {
             case "modules/user/active":
@@ -87,6 +86,12 @@ class Back extends CO_Controller {
             case "modules/settings/site":
                 @$configuration_site->title = 'Configuracion del Sitio';
                 break;
+            case "modules/settings/genders":
+                @$this->data['all_genders']->count = $this->db->count_all_results('genders');
+                $this->db->order_by('g_name', 'ASC');
+                @$this->data['all_genders']->data = $this->Site->DB2Array($this->db->get("genders"));
+                @$configuration_site->title = 'Generos del Contenido';
+                break;
             case "pages/errors/404":
                 @$configuration_site->title = 'Pagina no encontrada';
                 break;
@@ -94,7 +99,7 @@ class Back extends CO_Controller {
                 $config['total_rows'] = $this->db->count_all_results("users");
                 $config['uri_segment'] = 4;
                 $config['per_page'] = 9;
-                $config['base_url'] = base_url()."dashboard/user/all";
+                $config['base_url'] = base_url() . "dashboard/user/all";
                 $this->pagination->initialize($config);
                 $this->db->order_by('u_username', 'ASC');
                 $this->db->limit(9, $this->uri->segment(4));
@@ -122,6 +127,7 @@ class Back extends CO_Controller {
                 }
                 break;
             default:
+                @$this->data['all_users']->count = $this->db->count_all_results('users');
                 @$configuration_site->title = 'Panel de Control';
                 break;
         }
