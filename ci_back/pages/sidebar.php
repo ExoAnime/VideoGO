@@ -37,6 +37,7 @@
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/site">Sitio</a></li>
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/genders">Generos</a></li>
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/qualities">Calidades</a></li>
+                                <li><a href="<?= @$site->url ?>/dashboard/settings/languages">Idiomas</a></li>
                             </ul>
                         </li>
                         <?php

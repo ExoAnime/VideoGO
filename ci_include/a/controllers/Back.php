@@ -86,6 +86,12 @@ class Back extends CO_Controller {
             case "modules/settings/site":
                 @$configuration_site->title = 'Configuracion del Sitio';
                 break;
+             case "modules/settings/languages":
+                @$this->data['all_languages']->count = $this->db->count_all_results('languages');
+                $this->db->order_by('l_name', 'ASC');
+                @$this->data['all_languages']->data = $this->Site->DB2Array($this->db->get("languages"));
+                @$configuration_site->title = 'Idiomas del Contenido';
+                break;
             case "modules/settings/qualities":
                 @$this->data['all_qualities']->count = $this->db->count_all_results('qualities');
                 $this->db->order_by('q_name', 'ASC');

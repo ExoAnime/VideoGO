@@ -25,6 +25,29 @@ class Site extends CO_Model {
         parent::__construct();
     }
 
+    public function Add_languages() {
+        if ($this->User->isLogin()) {
+            if (@$this->User->getSession()->u_level > 1) {
+                @$_POST["l_seo"] = $this->slug(trim($_POST['l_name']));
+                $isQualitie = @$this->db->get_where("languages", array("l_seo" => $_POST["l_seo"]))->row();
+                if ($isQualitie == '') {
+                    $_POST['l_name'] = strtolower(trim($_POST['l_name']));
+                    $this->db->insert("languages", $_POST);
+                    if (!$this->isDataBaseError()) {
+                        $this->notify("idioma agregado correctamente", "success");
+                        $this->print_js("location.reload();");
+                    }
+                } else {
+                    $this->setHeaderError("The language is already registered");
+                }
+            } else {
+                $this->setHeaderError("You do not have the necessary privileges");
+            }
+        } else {
+            $this->setHeaderError("You do not have an active session");
+        }
+    }
+
     public function Add_qualities() {
         if ($this->User->isLogin()) {
             if (@$this->User->getSession()->u_level > 1) {
