@@ -25,6 +25,23 @@ class Site extends CO_Model {
         parent::__construct();
     }
 
+    public function Advertising() {
+        if ($this->User->isLogin()) {
+            if (@$this->User->getSession()->u_level > 1) {
+                $str = $this->db->update_string('advertising', $_POST, array("c_id" => 1));
+                $this->db->query($str);
+                if (!$this->isDataBaseError()) {
+                    $this->notify("publicidad actualizada correctamente", "info");
+                    $this->print_js("location.reload();");
+                }
+            } else {
+                $this->setHeaderError("You do not have the necessary privileges");
+            }
+        } else {
+            $this->setHeaderError("You do not have an active session");
+        }
+    }
+
     public function Add_languages() {
         if ($this->User->isLogin()) {
             if (@$this->User->getSession()->u_level > 1) {

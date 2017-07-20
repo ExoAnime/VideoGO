@@ -38,6 +38,7 @@
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/genders">Generos</a></li>
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/qualities">Calidades</a></li>
                                 <li><a href="<?= @$site->url ?>/dashboard/settings/languages">Idiomas</a></li>
+                                <li><a href="<?= @$site->url ?>/dashboard/settings/advertising">Publicidad</a></li>
                             </ul>
                         </li>
                         <?php

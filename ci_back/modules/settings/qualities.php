@@ -28,6 +28,7 @@
                 </form>
             </div>
         </div>
+        <div class="ads table-responsive"><?= @$advertising->a_300x250 ?></div>
     </div>
     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
         <div class="x_panel">

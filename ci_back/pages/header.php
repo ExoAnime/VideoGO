@@ -73,6 +73,10 @@ Copyright @2017 xlfederalelk0lx.
             .m-top-19{
                 margin-top: 19px;
             }
+            .ads{
+                padding: 5px 0px 10px 0px;
+                text-align: center;
+            }
         </style>
     </head>
     <body class="<?= (@$vg_user == '') ? "login" : "nav-md" ?>">

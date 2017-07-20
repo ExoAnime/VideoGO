@@ -13,7 +13,8 @@
                 <?php
                 $this->load->view("../../." . APP_BACK . @$page);
                 ?>
-            </div>            
+                <div class="ads table-responsive"><?= @$advertising->a_728x90 ?></div>
+            </div>        
         </div>
 
         <footer>

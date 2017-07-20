@@ -179,6 +179,7 @@
                         <div role="tabpanel" class="tab-pane fade active in" id="personal" aria-labelledby="personal-tab">
                             <p><?= (@$user_profile->u_bios != '') ? @$user_profile->u_bios : "Este usuario no ha actualizado su perfil" ?></p>
                         </div>
+                        <div class="ads table-responsive"><?= @$advertising->a_300x250 ?><?= @$advertising->a_300x250 ?></div>
                         <?
                     }
                     ?>

@@ -86,7 +86,10 @@ class Back extends CO_Controller {
             case "modules/settings/site":
                 @$configuration_site->title = 'Configuracion del Sitio';
                 break;
-             case "modules/settings/languages":
+            case "modules/settings/advertising":
+                @$configuration_site->title = 'Publicidad del sitio';
+                break;
+            case "modules/settings/languages":
                 @$this->data['all_languages']->count = $this->db->count_all_results('languages');
                 $this->db->order_by('l_name', 'ASC');
                 @$this->data['all_languages']->data = $this->Site->DB2Array($this->db->get("languages"));
@@ -148,6 +151,8 @@ class Back extends CO_Controller {
         if (@$this->User->getSession() == '' && $uri_page != "modules/user/active") {
             @$configuration_site->title = "Acceder al Sitio";
         }
+        
+        $this->data['advertising'] = $this->db->get_where("advertising", array("c_id" => 1))->row();
 
         return $configuration_site;
     }
