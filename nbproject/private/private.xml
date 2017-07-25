@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/xlfederalelk0lx/Proyectos/Web/VideoGO/ci_back/modules/user/all.php</file>
-            <file>file:/home/xlfederalelk0lx/Proyectos/Web/VideoGO/ci_include/a/controllers/Back.php</file>
-            <file>file:/home/xlfederalelk0lx/Proyectos/Web/VideoGO/ci_back/modules/user/profile.php</file>
+            <file>file:/home/xlfederalelk0lx/Proyectos/Web/VideoGO/ci_classes/apis/Movie.php</file>
+            <file>file:/home/xlfederalelk0lx/Proyectos/Web/VideoGO/ci_back/modules/movie/add.php</file>
+            <file>file:/home/xlfederalelk0lx/Proyectos/Web/VideoGO/ci_classes/apis/User.php</file>
         </group>
     </open-files>
 </project-private>

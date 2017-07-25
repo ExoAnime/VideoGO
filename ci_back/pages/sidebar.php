@@ -28,6 +28,12 @@
                             <li><a href="<?= @$site->url ?>/dashboard/user/profile">Tu Perfil</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a><i class="fa fa-play"></i>Peliculas<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="<?= @$site->url ?>/dashboard/movie/add">Agregar</a></li>
+                        </ul>
+                    </li>
                     <?php
                     if (@$vg_user->u_level > 1) {
                         ?>

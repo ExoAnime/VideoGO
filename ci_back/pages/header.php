@@ -58,6 +58,9 @@ Copyright @2017 xlfederalelk0lx.
         if (@$page == 'modules/settings/genders' || @$page == 'modules/settings/qualities') {
             array_push($css_files, "/vendors/datatables.net/css/jquery.dataTables.min.css");
         }
+        if(@$page=='modules/movie/add'){
+            array_push($css_files, "/vendors/select2/dist/css/select2.min.css");
+        }
         array_push($css_files, "/vendors/build/css/custom.min.css");
         for ($i = 0; $i < sizeof($css_files); $i++) {
             if ($i > 0)

@@ -82,7 +82,7 @@ class Api extends CO_Controller {
         }
     }
 
-    private function decode_post_keys() {
+    private function decode_post_keys() {        
         foreach ($this->input->post() as $key => $value) {
             $x = $this->encryption->decrypt(urldecode($key));
             if ($x != '') {
@@ -98,7 +98,7 @@ class Api extends CO_Controller {
                     exit();
                 }
             }
-        }
+        }        
     }
 
 }

@@ -60,6 +60,22 @@ var VideoGO = {
                 });
             }
 
+            if ($(".select2-selection--multiple").length > 0) {
+                $(".select2-selection--multiple").select2();
+                $('.select2-selection--multiple').on('select2:select', function (evt) {
+                    var h_id = $(this).data('input');
+                    if (h_id != undefined && h_id != '') {
+                        $("#" + h_id).val($(this).val());                        
+                    }
+                });
+                $('.select2-selection--multiple').on('select2:unselect', function (evt) {
+                    var h_id = $(this).data('input');
+                    if (h_id != undefined && h_id != '') {
+                        $("#" + h_id).val($(this).val());
+                    }
+                });
+            }
+
             if ($(".btn_upload_avatar").length > 0) {
                 $(".btn_upload_avatar").click(function () {
                     $("#upload_avatar").val("");

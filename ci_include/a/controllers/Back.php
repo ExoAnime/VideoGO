@@ -80,8 +80,11 @@ class Back extends CO_Controller {
     public function getPageTitle($uri_page, $configuration_site) {
         @$configuration_site->slogan = $configuration_site->c_name;
         switch ($uri_page) {
-            case "modules/user/active":
-                @$configuration_site->title = 'Activando cuenta';
+            case "modules/movie/add":
+                @$this->data['all_languages']->data = $this->Site->DB2Array($this->db->get("languages"));
+                @$this->data['all_qualities']->data = $this->Site->DB2Array($this->db->get("qualities"));
+                @$this->data['all_genders']->data = $this->Site->DB2Array($this->db->get("genders"));
+                @$configuration_site->title = 'Agregar película';
                 break;
             case "modules/settings/site":
                 @$configuration_site->title = 'Configuracion del Sitio';
@@ -109,6 +112,9 @@ class Back extends CO_Controller {
                 break;
             case "pages/errors/404":
                 @$configuration_site->title = 'Pagina no encontrada';
+                break;
+            case "modules/user/active":
+                @$configuration_site->title = 'Activando cuenta';
                 break;
             case "modules/user/all":
                 $config['total_rows'] = $this->db->count_all_results("users");
@@ -151,7 +157,7 @@ class Back extends CO_Controller {
         if (@$this->User->getSession() == '' && $uri_page != "modules/user/active") {
             @$configuration_site->title = "Acceder al Sitio";
         }
-        
+
         $this->data['advertising'] = $this->db->get_where("advertising", array("c_id" => 1))->row();
 
         return $configuration_site;
