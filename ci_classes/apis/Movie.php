@@ -25,6 +25,48 @@ class Movie extends CO_Model {
         parent::__construct();
     }
 
+    public function Boot() {
+        $this->get("http://www.pelispedia.tv/api/666more.php?rangeStart=284&rangeEnd=283&flagViewMore=true&letra=&year=&genre=");
+        preg_match_all("/(.*)<img src=\"(.*)\" alt=\"(.*)<br>(.*)\"(.*)/", $this->response, $matches);
+        @$data->images = $matches[2];
+        @$data->titles = $matches[3];
+        preg_match_all("/(.*)<a href=\"(.*)\" title=\"\"(.*)/", $this->response, $matches);
+        @$data->links = $matches[2];
+        $json = array();
+        for ($i = 0; $i < sizeof($data->links); $i++) {
+            $this->get($data->links[$i]);
+            $this->response = html_entity_decode($this->response);
+            @$json[$i]->m_title = $data->titles[$i];
+            @$json[$i]->m_seo = $this->slug(@$json[$i]->m_title);
+            @$json[$i]->m_sinopsis = $this->cut_str($this->response, 'description" content="', '"');
+            @$json[$i]->m_year = $this->cut_str($this->response, 'href="/anio/', '/');
+            @$json[$i]->m_date = time() + rand(1, 9999);
+            @$json[$i]->m_qualitie = 15;
+            $generos = $this->cut_str($this->response, 'font-weight: bold;">Genero:</span>', "</div>");
+            $generos = explode('</a>', $generos);
+            $n=array();
+            for ($j = 0; $j < sizeof($generos); $j++) {
+                $x = str_replace(array(",", "</a>"), "", $this->slug($this->cut_str(@$generos[$j], ">", ",")));
+                $r = @$this->db->get_where("genders", array("g_seo" => trim($x)))->row()->g_id;
+                if ($r >0) {
+                    $n[sizeof($n)] = $r;
+                }
+            }
+            @$json[$i]->m_genders = trim(implode(",", $n));
+            @$json[$i]->m_languages = 6;
+            @$json[$i]->m_online = 1;
+        }
+        
+        foreach ($json as $key => $value) {
+            $isMovie = $this->db->get_where("movies", array("m_seo" => $value->m_seo));
+            if ($isMovie->num_rows() < 1) {
+                $this->db->insert("movies",$value);
+                $this->get($data->images[$key]);
+                write_file(APP_FRONT . "images/cover_movie_" . $this->db->insert_id() . ".png", $this->response);
+            }
+        }
+    }
+
     public function Add() {
         if ($this->User->isLogin()) {
             if (@$this->User->getSession()->u_level > 1) {

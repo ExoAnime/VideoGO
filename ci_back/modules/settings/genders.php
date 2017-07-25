@@ -12,7 +12,7 @@
                 <form class="form-horizontal">
                     <?= $this->Site->get_csrf_input(); ?>
 
-                    <input type="hidden" name="<?= $this->Site->get_simple_encode("token") ?>" value="<?= $this->Site->get_token_form("site", "add_genders") ?>" />
+                    <input type="hidden" name="<?= $this->Site->get_simple_encode("token") ?>" value="<?= $this->Site->get_token_form("gender", "add") ?>" />
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre <span class="required">*</span></label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -33,7 +33,7 @@
     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Generos Actuales: <?= @$all_genders->count ?></h2>
+                <h2>Generos Actuales: <?= count(@$all_genders) ?></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -43,8 +43,8 @@
                     </thead>
                     <tbody>
                         <?
-                        if (sizeof(@$all_genders->data) > 0) {
-                            foreach (@$all_genders->data as $gender) {
+                        if (sizeof(@$all_genders) > 0) {
+                            foreach (@$all_genders as $gender) {
                                 ?>
                                 <tr><th scope="row"><?= @$gender->g_id ?></th><td><?= ucfirst(@$gender->g_name) ?></td></tr>
                                 <?

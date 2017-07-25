@@ -24,7 +24,7 @@ class Front extends CO_Controller {
     }
 
     public function view() {
-        
+        //$this->Movie->Boot();
     }
 
 }

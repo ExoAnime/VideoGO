@@ -12,7 +12,7 @@
                 <form class="form-horizontal">
                     <?= $this->Site->get_csrf_input(); ?>
 
-                    <input type="hidden" name="<?= $this->Site->get_simple_encode("token") ?>" value="<?= $this->Site->get_token_form("site", "add_qualities") ?>" />
+                    <input type="hidden" name="<?= $this->Site->get_simple_encode("token") ?>" value="<?= $this->Site->get_token_form("qualitie", "add") ?>" />
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Calidad <span class="required">*</span></label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -33,7 +33,7 @@
     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Calidades Actuales: <?= @$all_qualities->count ?></h2>
+                <h2>Calidades Actuales: <?= count(@$all_qualities) ?></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -43,8 +43,8 @@
                     </thead>
                     <tbody>
                         <?
-                        if (sizeof(@$all_qualities->data) > 0) {
-                            foreach (@$all_qualities->data as $qualitie) {
+                        if (sizeof(@$all_qualities) > 0) {
+                            foreach (@$all_qualities as $qualitie) {
                                 ?>
                                 <tr><th scope="row"><?= @$qualitie->q_id ?></th><td><?= strtoupper(@$qualitie->q_name) ?></td></tr>
                                 <?

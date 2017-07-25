@@ -70,7 +70,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <select required autofocus class="form-control select2-selection--multiple" data-input="h_genero" multiple="multiple">
                                 <?
-                                foreach ($all_genders->data as $r) {
+                                foreach ($all_genders as $r) {
                                     echo '<option value="' . $r->g_id . '">' . ucfirst($r->g_name) . '</option>';
                                 }
                                 ?>
@@ -82,7 +82,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <select required autofocus class="form-control select2-selection--multiple" data-input="h_idioma" multiple="multiple">
                                 <?
-                                foreach ($all_languages->data as $r) {
+                                foreach ($all_languages as $r) {
                                     echo '<option value="' . $r->l_id . '">' . ucfirst($r->l_name) . '</option>';
                                 }
                                 ?>
@@ -94,7 +94,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <select name="<?= $this->Site->get_simple_encode("m_qualitie") ?>" required autofocus class="form-control">
                                 <?
-                                foreach ($all_qualities->data as $r) {
+                                foreach ($all_qualities as $r) {
                                     echo '<option value="' . $r->q_id . '">' . strtoupper($r->q_name) . '</option>';
                                 }
                                 ?>

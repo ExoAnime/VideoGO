@@ -80,10 +80,13 @@ class Back extends CO_Controller {
     public function getPageTitle($uri_page, $configuration_site) {
         @$configuration_site->slogan = $configuration_site->c_name;
         switch ($uri_page) {
+            case "modules/movie/all":
+                @$configuration_site->title = 'Listado de Peliculas';
+                break;
             case "modules/movie/add":
-                @$this->data['all_languages']->data = $this->Site->DB2Array($this->db->get("languages"));
-                @$this->data['all_qualities']->data = $this->Site->DB2Array($this->db->get("qualities"));
-                @$this->data['all_genders']->data = $this->Site->DB2Array($this->db->get("genders"));
+                @$this->data['all_languages'] = $this->Language->GetAll();
+                @$this->data['all_qualities'] = $this->Qualitie->GetAll();
+                @$this->data['all_genders'] = $this->Gender->GetAll();
                 @$configuration_site->title = 'Agregar película';
                 break;
             case "modules/settings/site":
@@ -93,21 +96,18 @@ class Back extends CO_Controller {
                 @$configuration_site->title = 'Publicidad del sitio';
                 break;
             case "modules/settings/languages":
-                @$this->data['all_languages']->count = $this->db->count_all_results('languages');
                 $this->db->order_by('l_name', 'ASC');
-                @$this->data['all_languages']->data = $this->Site->DB2Array($this->db->get("languages"));
+                @$this->data['all_languages'] = $this->Language->GetAll();
                 @$configuration_site->title = 'Idiomas del Contenido';
                 break;
             case "modules/settings/qualities":
-                @$this->data['all_qualities']->count = $this->db->count_all_results('qualities');
                 $this->db->order_by('q_name', 'ASC');
-                @$this->data['all_qualities']->data = $this->Site->DB2Array($this->db->get("qualities"));
+                @$this->data['all_qualities'] = $this->Qualitie->GetAll();
                 @$configuration_site->title = 'Calidades del Contenido';
                 break;
             case "modules/settings/genders":
-                @$this->data['all_genders']->count = $this->db->count_all_results('genders');
                 $this->db->order_by('g_name', 'ASC');
-                @$this->data['all_genders']->data = $this->Site->DB2Array($this->db->get("genders"));
+                @$this->data['all_genders'] = $this->Gender->GetAll();
                 @$configuration_site->title = 'Generos del Contenido';
                 break;
             case "pages/errors/404":
@@ -148,6 +148,7 @@ class Back extends CO_Controller {
                 }
                 break;
             default:
+                @$this->data['all_movies']->count = $this->db->count_all_results('movies');
                 @$this->data['all_genders']->count = $this->db->count_all_results('genders');
                 @$this->data['all_users']->count = $this->db->count_all_results('users');
                 @$configuration_site->title = 'Panel de Control';

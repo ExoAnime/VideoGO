@@ -31,6 +31,7 @@
                     <li>
                         <a><i class="fa fa-play"></i>Peliculas<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
+                            <li><a href="<?= @$site->url ?>/dashboard/movie/all">Ver Todas</a></li>
                             <li><a href="<?= @$site->url ?>/dashboard/movie/add">Agregar</a></li>
                         </ul>
                     </li>
